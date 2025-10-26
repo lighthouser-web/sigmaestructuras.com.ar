@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     const observerTarget = document.getElementById("ul-beneficios");
     const animationDuration = 1000; // total duration in ms
-    const startDelay = 500; // delay before animation starts, in ms
+    const startDelay = 750; // delay before animation starts, in ms
 
     // Select all target elements
     const elements = document.querySelectorAll('.dynamic-number');

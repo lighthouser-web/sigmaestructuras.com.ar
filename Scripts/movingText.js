@@ -10,6 +10,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const movingTexts = document.querySelectorAll('.moving-text');
   const fadeInElements = document.querySelectorAll('.fade-in-element');
+  const movingImgs = document.querySelectorAll('.moving-img');
+  const movingBeneficio = document.querySelectorAll('.moving-beneficio');
 
   const observer = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
@@ -25,6 +27,14 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   fadeInElements.forEach(element => {
+    observer.observe(element);
+  });
+
+  movingImgs.forEach(element => {
+    observer.observe(element);
+  });
+
+  movingBeneficio.forEach(element => {
     observer.observe(element);
   });
 });

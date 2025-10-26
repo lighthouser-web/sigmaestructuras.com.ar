@@ -7,7 +7,7 @@
   }
 
 :root {
-    --strongColor: #1ca80c;
+    --strongColor: #3ac92a;
     --secondaryColor: #ff6f00;
     --whiteColor: #ffffff;
     --blackColor: #000000;
@@ -60,7 +60,7 @@ body {
 
 .common-padding, #section-galeria .text-container {
     max-width: 90rem;
-    padding: 0 16px;
+    padding: 0 24px;
 }
 
 h1, h2, h3, .small-title {
@@ -77,6 +77,19 @@ h2 {
 
 h2, h3 {
     color: var(--blackColor);
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+h2::after, 
+h3::after {
+    content: " ";
+    position: absolute;
+    top: 128%;
+    left: calc(50% - 20px);
+    width: 40px;
+    height: 2px;
+    background-color: var(--strongColor);
 }
 
 .small-title {
@@ -291,19 +304,38 @@ section {
     overflow: hidden;
 }
 
+.flickity-page-dots {
+    bottom: 25px !important;
+}
+
+/* Style for all dots */
+.flickity-page-dots .dot {
+    width: 10px;
+    height: 10px;
+    background: transparent;      /* Transparent fill */
+    border: 2px solid white;      /* White border */
+    border-radius: 50%;
+    margin: 0 5px;
+    opacity: 1;                   /* Remove default fade */
+    transition: background 0.3s ease;
+  }
+  
+  /* Style for selected dot */
+  .flickity-page-dots .dot.is-selected {
+    background: white;            /* Fill when selected */
+  }
+  
+
 #slides {
     width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    transition: margin-left 1s;
+    height: 48rem;
 }
 
 .slide {
-    position: relative;margin: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
     padding: 0;
-    flex: 0 0 100%;
-    overflow: hidden;
 }
 
 .slide-img {
@@ -315,6 +347,52 @@ section {
     object-fit: cover;
     object-position: center;
     z-index: 0;
+}
+
+.img-overlay {
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+}
+
+.slide .img-overlay {
+    background-color: #333333;
+    opacity: 0.8;
+}
+
+.slider-side-button {
+    position: absolute;
+    top: 50%;
+    z-index: 250;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -25px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    transition: all .25s ease;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    min-height: unset;
+    padding: 0;
+        padding-left: 0px;
+    background-color: transparent;
+    color: var(--arrow-color);
+    font-weight: 400;
+}
+
+.slider-side-button::after {
+    font-size: 24px;
+    line-height: 1;
+
+}
+
+#slider-button-right::after {
+    content: "\f113";
+    font-family: "woodmart-font";
 }
 
 .statement-slide-div {
@@ -367,13 +445,8 @@ section {
 
 #section-statement p {
     font-size: 1.125rem;
-    line-height: 2rem;
+    line-height: 1.75rem;
     margin: 1rem 0;
-}
-
-#section-statement h1,
-#section-statement p {
-    text-shadow: 0 0 24px black;
 }
 
 .moving-text, .moving-servicio {
@@ -423,14 +496,34 @@ section {
 
 .call-to-action {
     color: var(--whiteColor);
+    transition: background-color 0.1s ease-in-out;
 }
 
 .call-to-action:hover {
-    background-color: #fc8505;
+    background-color: #33af25;
+    transition: background-color 0.1s ease-in-out;
 }
 
 #section-statement .call-to-action {
-    padding: 0 2rem;
+    padding: 0 1.25rem;
+}
+
+#section-statement .info-button {
+    margin-left: 1rem;
+    border: 1px solid grey;
+    transition: border 0.1s ease-in-out;
+}
+
+#section-statement .info-button:hover {
+    margin-left: 1rem;
+    border: 1px solid var(--whiteColor);
+    transition: border 0.1s ease-in-out;
+}
+
+#section-servicios .img-overlay {
+    background-color: #EAEAEA;
+    opacity: 0.90;
+    transition: background 0.3s, border-radius 0.3s, opacity 0.3s;
 }
 
 #section-servicios .bg-img {
@@ -503,9 +596,74 @@ section {
     background-color: var(--whiteColor);
 }
 
+#section-nosotros h3::after {
+    left: 0;
+}
+
+#section-medios-de-pago h3::after, 
+#section-contacto h2::after {
+    content: none;
+}
+
+#section-nosotros img {
+    border-radius: 20px;
+}
+
+#section-nosotros img.moving-img {
+    opacity: 0;
+    scale: 0.5;
+    transition: opacity 0.4s ease-in-out 0.3s, scale 0.3s ease-in-out 0.3s;
+}
+
+#section-nosotros img.moving-img.visible {
+    opacity: 1;
+    scale: 1;
+    -webkit-animation: slide-rotate-ver-right 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) reverse both;
+    animation: slide-rotate-ver-right 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) reverse both;
+    -webkit-animation-delay: 0.3s;
+    animation-delay: 0.3s;
+}
+
+@-webkit-keyframes slide-rotate-ver-right {
+    0% {
+      -webkit-transform: translateX(0) rotateY(0);
+              transform: translateX(0) rotateY(0);
+    }
+    100% {
+      -webkit-transform: translateX(30px) rotateY(-90deg);
+              transform: translateX(30px) rotateY(-90deg);
+    }
+  }
+  @keyframes slide-rotate-ver-right {
+    0% {
+      -webkit-transform: translateX(0) rotateY(0);
+              transform: translateX(0) rotateY(0);
+    }
+    100% {
+      -webkit-transform: translateX(30px) rotateY(-90deg);
+              transform: translateX(30px) rotateY(-90deg);
+    }
+  }
+
+#nosotros-quienes-somos .text-container {
+    max-width: 80%;
+}
+
+#nosotros-vision {
+    position: relative;
+    overflow: hidden;
+}
+
 #nosotros-vision .common-padding {
     position: relative;
     color: var(--whiteColor);
+    text-align: left;
+}
+
+#nosotros-vision .img-overlay {
+    background-color: #333333;
+    opacity: 0.8;
+    transition: background 0.3s, border-radius 0.3s, opacity 0.3s;
 }
 
 #nosotros-vision h3, 
@@ -520,10 +678,16 @@ section {
     object-fit: cover;
     object-position: center;
     z-index: 0;
+    border-radius: 0 !important;
 }
 
 #nosotros-vision .bg-img {
     height: 45rem;
+    scale: 2;
+}
+
+#nosotros-mision .text-container {
+    text-align: left;
 }
 
 #section-nosotros .common-padding {
@@ -577,6 +741,44 @@ section {
     padding: 1rem 2rem 2rem;
 }
 
+.li-beneficio.visible {
+    -webkit-animation: scale-in-tl 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: scale-in-tl 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@-webkit-keyframes scale-in-tl {
+    0% {
+      -webkit-transform: scale(0);
+              transform: scale(0);
+      -webkit-transform-origin: 0% 0%;
+              transform-origin: 0% 0%;
+      opacity: 1;
+    }
+    100% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+      -webkit-transform-origin: 0% 0%;
+              transform-origin: 0% 0%;
+      opacity: 1;
+    }
+  }
+  @keyframes scale-in-tl {
+    0% {
+      -webkit-transform: scale(0);
+              transform: scale(0);
+      -webkit-transform-origin: 0% 0%;
+              transform-origin: 0% 0%;
+      opacity: 1;
+    }
+    100% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+      -webkit-transform-origin: 0% 0%;
+              transform-origin: 0% 0%;
+      opacity: 1;
+    }
+  }
+
 .dynamic-number {
     font-size: 4rem;
     font-weight: 900;
@@ -595,6 +797,19 @@ section {
     font-size: 0.875rem;
     color: var(--greyColor);
     line-height: 1.25rem;
+}
+
+.li-beneficio:hover {
+    background: #106107;
+    background: linear-gradient(0deg, rgba(16, 97, 7, 1) 0%, rgba(43, 191, 27, 1) 100%);
+    transition: all 0.3s ease-in-out;
+}
+
+.li-beneficio:hover .dynamic-number,
+.li-beneficio:hover .li-beneficio-text,
+.li-beneficio:hover .li-beneficio-p {
+    color: var(--whiteColor);
+    transition: all 0.3s ease-in-out;
 }
 
 #section-galeria {
@@ -616,17 +831,17 @@ section {
 }
 
 .scroll-container .slick-slide {
-    display: flex;
+    display: flex !important;
     justify-content: center;
     align-items: center;
     width: 300px;
     height: 300px;
+    margin: 0 auto !important;
 }
 
 .scroll-container .slick-slide img {
     width: auto;
     height: 100%;
-    object-fit: cover;
     margin: 0;
 }
 
@@ -677,6 +892,16 @@ section {
 #section-contacto h3,
 #section-contacto p {
     color: var(--whiteColor);
+}
+
+#section-contacto .img-overlay {
+    background-color: #333333;
+    opacity: 0.5;
+    transition: background 0.3s, border-radius 0.3s, opacity 0.3s;
+}
+
+#section-contacto h2 {
+    margin-bottom: 1rem;
 }
 
 #section-contacto .common-padding {
@@ -999,6 +1224,10 @@ footer hr {
         background-size: 80%;
     }
 
+    #slides {
+        height: 64rem;
+    }
+
     #section-statement .common-padding {
         display: flex;
         flex-direction: column;
@@ -1030,7 +1259,7 @@ footer hr {
     }
 
     #section-statement p {
-        max-width: 30%;
+        max-width: 50%;
     }
 
     #section-servicios ul {
