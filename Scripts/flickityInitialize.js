@@ -5,5 +5,8 @@ var elem = document.querySelector('#slides');
     contain: true,         // Keep cells within container
     autoPlay: false,        // Auto-slide every 3 seconds
     prevNextButtons: false, // Show prev/next arrows
-    pageDots: true         // Show page dots
+    pageDots: true,
+    imagesLoaded: true,
+    wrapAround: true,
   });
+  
