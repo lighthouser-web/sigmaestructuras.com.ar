@@ -1374,6 +1374,10 @@ footer hr {
         margin: 0 30px;
     }
 
+    #header-logo-container-desktop:hover {
+        cursor: pointer;
+    }
+
     #header-logo-container-desktop a.desktop {
         display: inline-block;
         width: 190px;
